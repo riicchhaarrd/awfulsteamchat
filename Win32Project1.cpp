@@ -39,6 +39,7 @@ public:
 std::vector<MsgType> v_friendMessages;
 
 void exitproc() {
+	WSACleanup();
 	SteamAPI_Shutdown();
 
 	ExitProcess(0);
@@ -187,10 +188,6 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		ExitProcess(0);
 		return 0;
 	}
-#if 1
-	SetEnvironmentVariableA("SteamGameId", va("%d", STEAM_APPID));
-	SetEnvironmentVariableA("SteamAppId", va("%d", STEAM_APPID));
-#endif
 	if (!SteamAPI_Init()) {
 		MessageBoxW(NULL, L"fail load steam", L"",MB_OK|MB_ICONERROR);
 		exitproc();
